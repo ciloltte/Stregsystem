@@ -9,7 +9,8 @@ namespace Stregsystem
     interface ILog
     {
         void SaveTransaction(Transaction transaction);
-        string[] ReadTransactions(int numTransactionsToRaed);
-        string[] ReadTransactionsByUserId(int userId);
+        List<string> ReadLatestTransactions(int numTransactionsToRaed);
+        List<string> ReadLatestTransactionsByUserId(int userId, int numTransactionsToRaed);
+        int GetNextTransactionID();
     }
 }

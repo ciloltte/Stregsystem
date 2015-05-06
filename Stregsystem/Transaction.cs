@@ -34,7 +34,7 @@ namespace Stregsystem
 
         public override string ToString()
         {
-            return "ID: " + TransactionID + "  Username: " + User.Username + "  Amount: " + Amount + "  Time of transaction: " + TimeOfTransaction;
+            return " ID=" + TransactionID + " Username=" + User.Username + " Amount=" + Amount + " TimeOfTransaction=" + TimeOfTransaction;
         }
 
 

@@ -38,7 +38,7 @@ namespace Stregsystem
 
         public override string ToString()
         {
-            return "Buy transaction:  " + base.ToString() + "  Product: " + (amountOfProduct > 0 ? amountOfProduct + " x " + product.Name : product.Name);
+            return "BuyTransaction=" + base.ToString() + " Product=" + (amountOfProduct > 0 ? amountOfProduct + "x" + product.Name : product.Name);
         }
     }
 }

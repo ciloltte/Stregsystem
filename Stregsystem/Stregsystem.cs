@@ -12,6 +12,11 @@ namespace Stregsystem
         private List<Product> productList;
         private List<User> userList;
 
+        public Stregsystem()
+        {
+            log = new Log();
+        }
+
         public void BuyProduct(int productID, string username)
         {
             Transaction trans = new BuyTransaction(log.GetNextTransactionID(), GetUser(username), GetProduct(productID));

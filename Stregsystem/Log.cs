@@ -25,14 +25,36 @@ namespace Stregsystem
             writer.WriteLine(transaction.ToString());
         }
 
-        public List<string> ReadLatestTransactions(int numTransactionsToRaed)
+        public List<string> ReadLatestTransactions(int numTransactionsToRead)
         {
-            throw new NotImplementedException();
+            List<string> tempList = GetAllTransactions();
+            List<string> results = new List<string>();
+
+            for (int i = tempList.Count - 1; i > (tempList.Count > numTransactionsToRead ? tempList.Count - numTransactionsToRead : tempList.Count); i--)
+            {
+                results.Add(tempList[i]);
+            }
+
+            return results;
         }
 
         public List<string> ReadLatestTransactionsByUserId(User user, int numTransactionsToRaed)
         {
-            throw new NotImplementedException();
+            List<string> tempList = GetAllTransactions();
+            List<string> results = new List<string>();
+            int count = tempList.Count - 1;
+
+            while (results.Count < numTransactionsToRaed && count >= 0)
+            {
+                if (tempList[count].Split(' ')[2].Split('=')[1] == user.Username)
+                {
+                    results.Add(tempList[count]);
+                }
+
+                count--;
+            }
+
+            return results;
         }
 
         public int GetNextTransactionID()
@@ -44,16 +66,16 @@ namespace Stregsystem
 
         private List<string> GetAllTransactions()
         {
-            List<string> transactionStrings = new List<string>();
+            List<string> results = new List<string>();
             StreamReader reader = new StreamReader(fileDir);
             string str;
 
             while ((str = reader.ReadLine()) != null)
             {
-                transactionStrings.Add(str);
+                results.Add(str);
             }
 
-            return transactionStrings;
+            return results;
         }
     }
 }

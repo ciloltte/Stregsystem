@@ -53,6 +53,7 @@
     <Compile Include="Stregsystem.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UsernameTakenException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

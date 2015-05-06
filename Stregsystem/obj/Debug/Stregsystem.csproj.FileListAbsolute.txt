@@ -1,1 +1,2 @@
 c:\users\august kørvell\documents\visual studio 2013\Projects\Stregsystem\Stregsystem\bin\Debug\Stregsystem.exe.config
+C:\Users\August\Source\Repos\Stregsystem\Stregsystem\bin\Debug\Stregsystem.exe.config

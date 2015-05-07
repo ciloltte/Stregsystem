@@ -14,10 +14,10 @@ namespace Stregsystem
             { get { return name; } set { name = value; } }
 
         public int Price 
-            { get { return Price; } set { Price = value; } }
+            { get { return price; } set { price = value; } }
 
         public bool Active 
-            { get { return Active; } set { Active = value; } }
+            { get { return active; } set { active = value; } }
 
         public bool CanBeBoughtOnCredit 
             { get { return CanBeBoughtOnCredit; } set { CanBeBoughtOnCredit = value; } }
@@ -30,10 +30,16 @@ namespace Stregsystem
 
         public Product(int productID, string name, int price, bool canBeBoughtOnCredit, bool active)
         {
+            this.productID = productID;
             this.name = name;
             this.price = price;
             this.canBeBoughtOnCredit = canBeBoughtOnCredit;
             this.active = active;
+        }
+
+        public override string ToString()
+        {
+            return ProductID + "\t" + Name + "\t" + (float)(Price / 100);
         }
     }
 }

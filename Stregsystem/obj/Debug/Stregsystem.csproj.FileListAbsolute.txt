@@ -5,3 +5,4 @@ C:\Users\August\Source\Repos\Stregsystem\Stregsystem\bin\Debug\Stregsystem.pdb
 C:\Users\August\Source\Repos\Stregsystem\Stregsystem\obj\Debug\Stregsystem.csprojResolveAssemblyReference.cache
 C:\Users\August\Source\Repos\Stregsystem\Stregsystem\obj\Debug\Stregsystem.exe
 C:\Users\August\Source\Repos\Stregsystem\Stregsystem\obj\Debug\Stregsystem.pdb
+C:\Users\August\Source\Repos\Stregsystem\Stregsystem\bin\Debug\products.csv

@@ -10,6 +10,10 @@ namespace Stregsystem
     {
         static void Main(string[] args)
         {
+            Stregsystem stregsystem = new Stregsystem();
+            StregsystemCLI cli = new StregsystemCLI(stregsystem);
+
+            cli.Start();
         }
     }
 }

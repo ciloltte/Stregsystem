@@ -10,7 +10,7 @@ namespace Stregsystem
     {
         void SaveTransaction(Transaction transaction);
         List<string> ReadLatestTransactions(int numTransactionsToRaed);
-        List<string> ReadLatestTransactionsByUserId(int userId, int numTransactionsToRaed);
+        List<string> ReadLatestTransactionsByUserId(User user, int numTransactionsToRaed);
         int GetNextTransactionID();
     }
 }

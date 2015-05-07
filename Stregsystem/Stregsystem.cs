@@ -9,12 +9,19 @@ namespace Stregsystem
     class Stregsystem
     {
         private Log log;
+        private ProductHandler productHandler;
+        private UserHandler userHandler;
         private List<Product> productList;
         private List<User> userList;
 
         public Stregsystem()
         {
             log = new Log();
+            productHandler = new ProductHandler();
+            userHandler = new UserHandler();
+
+            productList = productHandler.GetProductList();
+            userList = userHandler.Userlist;
         }
 
         public void BuyProduct(int productID, string username)

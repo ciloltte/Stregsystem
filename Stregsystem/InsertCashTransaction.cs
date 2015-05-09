@@ -16,7 +16,7 @@ namespace Stregsystem
 
         public override string ToString()
         {
-            return "Insert cash transaction=" + base.ToString();
+            return "InsertCashTransaction:" + base.ToString();
         }
     }
 }

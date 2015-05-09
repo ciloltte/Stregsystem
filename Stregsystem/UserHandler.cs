@@ -27,5 +27,7 @@ namespace Stregsystem
         {
             return userList.Count + 1;
         }
+
+        // Lav metoder der sørger for at alle felter er korrekte
     }
 }

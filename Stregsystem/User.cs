@@ -36,7 +36,7 @@ namespace Stregsystem
 
         public override string ToString()
         {
-            return "Firstname: " + Firstname + "\nEmail: " + Email;
+            return "Name: " + Firstname + " " + Lastname + "\nEmail: " + Email + "\nBalance: " + Balance / 100;
         }
 
         public override bool Equals(object obj)

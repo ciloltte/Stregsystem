@@ -24,11 +24,22 @@ namespace Stregsystem
             userList = userHandler.Userlist;
         }
 
-        public void BuyProduct(int productID, string username)
+        public BuyTransaction BuyProduct(int productID, string username)
         {
             Transaction trans = new BuyTransaction(log.GetNextTransactionID(), GetUser(username), GetProduct(productID));
 
             ExecuteTransaction(trans);
+
+            return trans as BuyTransaction;
+        }
+
+        public BuyTransaction BuyProduct(int productID, int amountOfProduct, string username)
+        {
+            Transaction trans = new BuyTransaction(log.GetNextTransactionID(), GetUser(username), GetProduct(productID), amountOfProduct);
+
+            ExecuteTransaction(trans);
+
+            return trans as BuyTransaction;
         }
 
         public void AddCreditsToAccount(int amount, string username)
@@ -69,7 +80,7 @@ namespace Stregsystem
             if (tempUserList.Count > 0 && tempUserList[0] != null)
                 return tempUserList[0];
 
-            return null;
+            throw new UserNotFoundException();
         }
 
         public List<string> GetTransactionList(int numOfTransactions)

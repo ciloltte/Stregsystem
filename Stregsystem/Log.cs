@@ -9,20 +9,25 @@ namespace Stregsystem
 {
     class Log : ILog
     {
-        private string fileDir = @"\TransactionLog.txt";
+        private string fileDir;
 
-        public void SaveTransaction(Transaction transaction)
+        public Log()
         {
-            string fileDir = @"\TransactionLog.txt";
+            fileDir = @".\TransactionLog.txt";
 
             if (!File.Exists(fileDir))
             {
                 File.Create(fileDir);
             }
+        }
 
+        public void SaveTransaction(Transaction transaction)
+        {
             StreamWriter writer = File.AppendText(fileDir);
 
             writer.WriteLine(transaction.ToString());
+
+            writer.Close();
         }
 
         public List<string> ReadLatestTransactions(int numTransactionsToRead)
@@ -61,7 +66,9 @@ namespace Stregsystem
         {
             List<string> tempList = GetAllTransactions();
 
-            return Convert.ToInt32(tempList[tempList.Count - 1].Split(' ')[1].Split('=')[1]);
+            if (tempList.Count > 0)
+                return Convert.ToInt32(tempList[tempList.Count - 1].Split(' ')[1].Split('=')[1]) + 1;
+            else return 1;
         }
 
         private List<string> GetAllTransactions()
@@ -74,6 +81,8 @@ namespace Stregsystem
             {
                 results.Add(str);
             }
+
+            reader.Close();
 
             return results;
         }

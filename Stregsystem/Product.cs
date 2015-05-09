@@ -39,7 +39,7 @@ namespace Stregsystem
 
         public override string ToString()
         {
-            return ProductID + "\t" + Name + "\t" + (float)(Price / 100);
+            return ProductID + "\t" + Name + "\t" + (float)(Price / 100) + " kr";
         }
     }
 }

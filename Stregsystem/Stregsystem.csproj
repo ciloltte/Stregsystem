@@ -54,10 +54,12 @@
     <Compile Include="SeasonalProduct.cs" />
     <Compile Include="Stregsystem.cs" />
     <Compile Include="StregsystemCLI.cs" />
+    <Compile Include="StregsystemCommandParser.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserHandler.cs" />
     <Compile Include="UsernameTakenException.cs" />
+    <Compile Include="UserNotFoundException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

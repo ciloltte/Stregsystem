@@ -10,29 +10,28 @@ namespace Stregsystem
     {
         private bool isRunning = true;
         private Stregsystem stregsystem;
+        private StregsystemCommandParser parser;
 
         public StregsystemCLI(Stregsystem stregsystem)
         {
             this.stregsystem = stregsystem;
+            parser = new StregsystemCommandParser(stregsystem, this);
         }
 
         private void CLILoop()
         {
             while (isRunning)
             {
+                Console.Clear();
                 PrintActiveProducts();
                 GetCommand();
+                WaitForKey();
             }
         }
 
         private void PrintActiveProducts()
         {
             List<Product> activeProducts = stregsystem.GetActiveProducts();
-
-            //for (int i = 0; i < activeProducts.Count; i++)
-            //{
-
-            //}
 
             foreach (Product product in activeProducts)
             {
@@ -42,7 +41,16 @@ namespace Stregsystem
 
         private void GetCommand()
         {
-            Console.ReadLine();
+            string command = Console.ReadLine();
+            Console.Clear();
+
+            parser.ParseCommand(command);
+        }
+
+        private void WaitForKey()
+        {
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadKey();
         }
 
         public void Start()

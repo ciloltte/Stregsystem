@@ -24,6 +24,7 @@ namespace Stregsystem
             adminFunctions.Add(":crediton", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).CanBeBoughtOnCredit = true);
             adminFunctions.Add(":creditoff", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).CanBeBoughtOnCredit = false);
             adminFunctions.Add(":addcredits", usernameAndAmount => stregsystem.AddCreditsToAccount(Convert.ToInt32(usernameAndAmount.Split()[1]), usernameAndAmount.Split()[0]));
+            adminFunctions.Add(":help", str => adminFunctions.Keys.ToList().ForEach(key => ui.DisplayMessage(key)));
 
             stregsystem.AddCreditsToAccount(10000, "siraggi");
         }
@@ -38,17 +39,28 @@ namespace Stregsystem
             }
             else
             {
-                if (commandParts.Count() == 3)
+                try
                 {
-                    ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[2]), Convert.ToInt32(commandParts[1]), commandParts[0]));
+                    if (commandParts.Count() == 3)
+                    {
+                        ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[2]), Convert.ToInt32(commandParts[1]), commandParts[0]));
+                    }
+                    else if (commandParts.Count() == 2)
+                    {
+                        ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[1]), commandParts[0]));
+                    }
+                    else if (commandParts.Count() == 1)
+                    {
+                        ui.DisplayUserInfo(stregsystem.GetUser(commandParts[0]));
+                    }
+                    else
+                    {
+                        ui.DisplayTooManyArgumentsError();
+                    }
                 }
-                else if (commandParts.Count() == 2)
+                catch(UserNotFoundException)
                 {
-                    ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[1]), commandParts[0]));
-                }
-                else if (commandParts.Count() == 1)
-                {
-                    ui.DisplayUserInfo(stregsystem.GetUser(commandParts[0]));
+                    ui.DisplayUserNotFound(commandParts[0]);
                 }
             }
         }
@@ -82,7 +94,17 @@ namespace Stregsystem
             for(int i = 1; i < commandParts.Count(); i++)
                 inputString += commandParts[i] + " ";
 
-            adminFunctions[commandParts[0]](inputString);
+            if (adminFunctions.ContainsKey(commandParts[0]))
+                try
+                {
+                    adminFunctions[commandParts[0]](inputString);
+                }
+                catch
+                {
+                    ui.DisplayError("Not a valid suffix for admin command " + commandParts[0]);
+                }
+            else
+                ui.DisplayError("Not a valid admin command.\nWrite ':help' to get all admin commands.");
         }
     }
 }

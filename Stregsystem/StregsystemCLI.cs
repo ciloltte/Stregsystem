@@ -60,7 +60,7 @@ namespace Stregsystem
 
         public void DisplayUserNotFound(string username)
         {
-            Console.WriteLine("No user with username: " + username + " found.");
+            Console.WriteLine("No user with username '" + username + "' found.");
         }
 
         public void DisplayProductNotFound(int productID)
@@ -98,6 +98,11 @@ namespace Stregsystem
         public void DisplayError(string errorString)
         {
             Console.WriteLine("ERROR: " + errorString);
+        }
+
+        public void DisplayMessage(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

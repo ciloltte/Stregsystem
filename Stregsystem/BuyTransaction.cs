@@ -30,7 +30,7 @@ namespace Stregsystem
 
         public override void Execute()
         {
-            if (User.Balance >= -Amount)
+            if (User.Balance >= -Amount || product.CanBeBoughtOnCredit)
                 base.Execute();
             else
                 throw new InsufficientCreditsException(User, Product);

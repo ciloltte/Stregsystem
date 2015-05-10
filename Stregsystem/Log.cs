@@ -17,7 +17,8 @@ namespace Stregsystem
 
             if (!File.Exists(fileDir))
             {
-                File.Create(fileDir);
+                FileStream stream = File.Create(fileDir);
+                stream.Close();
             }
         }
 

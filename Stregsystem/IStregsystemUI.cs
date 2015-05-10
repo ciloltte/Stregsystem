@@ -16,5 +16,6 @@ namespace Stregsystem
         void DisplayUserBuysProduct(BuyTransaction transaction);
         void Close();
         void DisplayError(string errorString);
+        void DisplayMessage(string message);
     }
 }

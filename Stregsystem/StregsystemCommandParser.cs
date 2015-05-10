@@ -25,44 +25,48 @@ namespace Stregsystem
             adminFunctions.Add(":creditoff", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).CanBeBoughtOnCredit = false);
             adminFunctions.Add(":addcredits", usernameAndAmount => stregsystem.AddCreditsToAccount(Convert.ToInt32(usernameAndAmount.Split()[1]), usernameAndAmount.Split()[0]));
             adminFunctions.Add(":help", str => adminFunctions.Keys.ToList().ForEach(key => ui.DisplayMessage(key)));
-
-            stregsystem.AddCreditsToAccount(10000, "siraggi");
         }
 
         public void ParseCommand(string command)
         {
             string[] commandParts = command.Split(' ');
 
-            if (command[0] == ':')
-            {
-                ParseAdminCommand(commandParts);
-            }
+            if (command != string.Empty)
+                if (command[0] == ':')
+                {
+                    ParseAdminCommand(commandParts);
+                }
+                else
+                {
+                    try
+                    {
+                        if (commandParts.Count() == 3)
+                        {
+                            ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[2]), Convert.ToInt32(commandParts[1]), commandParts[0]));
+                        }
+                        else if (commandParts.Count() == 2)
+                        {
+                            ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[1]), commandParts[0]));
+                        }
+                        else if (commandParts.Count() == 1)
+                        {
+                            ui.DisplayUserInfo(stregsystem.GetUser(commandParts[0]));
+                        }
+                        else
+                        {
+                            ui.DisplayTooManyArgumentsError();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if (e is UserNotFoundException)
+                            ui.DisplayUserNotFound(commandParts[0]);
+                        else if (e is InsufficientCreditsException)
+                            ui.DisplayError("Insufficient funds.");
+                    }
+                }
             else
-            {
-                try
-                {
-                    if (commandParts.Count() == 3)
-                    {
-                        ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[2]), Convert.ToInt32(commandParts[1]), commandParts[0]));
-                    }
-                    else if (commandParts.Count() == 2)
-                    {
-                        ui.DisplayUserBuysProduct(stregsystem.BuyProduct(Convert.ToInt32(commandParts[1]), commandParts[0]));
-                    }
-                    else if (commandParts.Count() == 1)
-                    {
-                        ui.DisplayUserInfo(stregsystem.GetUser(commandParts[0]));
-                    }
-                    else
-                    {
-                        ui.DisplayTooManyArgumentsError();
-                    }
-                }
-                catch(UserNotFoundException)
-                {
-                    ui.DisplayUserNotFound(commandParts[0]);
-                }
-            }
+                ui.DisplayError("You must type a command.");
         }
 
         private bool ValidCommand(string[] commandParts)

@@ -1,1 +1,2 @@
 ﻿http://www.dotnetperls.com/remove-html-tags
+http://stackoverflow.com/questions/4503542/check-for-special-characters-in-a-string

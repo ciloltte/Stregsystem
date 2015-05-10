@@ -70,12 +70,13 @@ namespace Stregsystem
 
         public void DisplayUserInfo(User user)
         {
-            Console.WriteLine(user.ToString());
+            Console.WriteLine(user.ToString() + "\n");
+            stregsystem.log.ReadLatestTransactionsByUserId(user, 10).ForEach(Console.WriteLine);
         }
 
         public void DisplayTooManyArgumentsError()
         {
-            Console.WriteLine("Not a valid command, to many arugments.");
+            Console.WriteLine("Not a valid command, too many arugments.");
         }
 
         public void DisplayAdminCommandNotFoundMessage()
@@ -87,7 +88,7 @@ namespace Stregsystem
         {
             bool moreThanOne = transaction.AmountOfProduct > 1;
             Console.WriteLine("User " + transaction.User.Username + " bought " + 
-                (moreThanOne ? transaction.AmountOfProduct + " x " + transaction.Product.Name : transaction.Product.Name) + " for " + (transaction.Amount / 100) + " kr.");
+                (moreThanOne ? transaction.AmountOfProduct + " x " + transaction.Product.Name : transaction.Product.Name) + " for " + (-(transaction.Amount / 100)) + " kr.");
         }
 
         public void Close()

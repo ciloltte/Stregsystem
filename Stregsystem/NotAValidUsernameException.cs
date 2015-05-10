@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Stregsystem
 {
-    class UsernameTakenException : Exception
+    class NotAValidUsernameException : Exception
     {
         public string Username { get { return username; } }
 
         private string username;
 
-        public UsernameTakenException(string username)
+        public NotAValidUsernameException(string username)
         {
             this.username = username;
         }

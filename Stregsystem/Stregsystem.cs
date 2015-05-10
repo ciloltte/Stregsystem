@@ -8,7 +8,8 @@ namespace Stregsystem
 {
     class Stregsystem
     {
-        private Log log;
+        public Log log;
+
         private ProductHandler productHandler;
         private UserHandler userHandler;
         private List<Product> productList;

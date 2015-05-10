@@ -47,6 +47,8 @@
     <Compile Include="InsufficientCreditsException.cs" />
     <Compile Include="IStregsystemUI.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="NotAValidEmailException.cs" />
+    <Compile Include="NotAValidUsernameException.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductHandler.cs" />
     <Compile Include="Program.cs" />

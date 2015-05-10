@@ -20,7 +20,7 @@ namespace Stregsystem
             { get { return active; } set { active = value; } }
 
         public bool CanBeBoughtOnCredit 
-            { get { return CanBeBoughtOnCredit; } set { CanBeBoughtOnCredit = value; } }
+            { get { return canBeBoughtOnCredit; } set { canBeBoughtOnCredit = value; } }
 
         private int productID;
         private string name;

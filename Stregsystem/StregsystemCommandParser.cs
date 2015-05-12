@@ -16,14 +16,19 @@ namespace Stregsystem
         {
             this.stregsystem = stregsystem;
             this.ui = ui;
+
+            MakeTempUsers();
+
             adminFunctions = new Dictionary<string, Action<string>>();
 
+            adminFunctions.Add(":q", str => ui.Close());
             adminFunctions.Add(":quit", str => ui.Close());
             adminFunctions.Add(":activate", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).Active = true);
             adminFunctions.Add(":deactivate", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).Active = false);
             adminFunctions.Add(":crediton", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).CanBeBoughtOnCredit = true);
             adminFunctions.Add(":creditoff", productID => stregsystem.GetProduct(Convert.ToInt32(productID)).CanBeBoughtOnCredit = false);
             adminFunctions.Add(":addcredits", usernameAndAmount => stregsystem.AddCreditsToAccount(Convert.ToInt32(usernameAndAmount.Split()[1]), usernameAndAmount.Split()[0]));
+            adminFunctions.Add(":makeuser", userDetails => MakeUser(userDetails));
             adminFunctions.Add(":help", str => adminFunctions.Keys.ToList().ForEach(key => ui.DisplayMessage(key)));
         }
 
@@ -34,9 +39,9 @@ namespace Stregsystem
             if (command != string.Empty)
                 if (command[0] == ':')
                 {
-                    ParseAdminCommand(commandParts);
+                    ExecuteAdminCommand(commandParts);
                 }
-                else
+                else if (ValidCommand(commandParts))
                 {
                     try
                     {
@@ -65,6 +70,8 @@ namespace Stregsystem
                             ui.DisplayError("Insufficient funds.");
                     }
                 }
+                else
+                    ui.DisplayError("Not a valid command");
             else
                 ui.DisplayError("You must type a command.");
         }
@@ -87,11 +94,13 @@ namespace Stregsystem
                 if (Int32.TryParse(commandParts[1], out temp))
                     return true;
             }
+            else if (commandParts.Count() == 1)
+                return true;
 
             return false;
         }
 
-        private void ParseAdminCommand(string[] commandParts)
+        private void ExecuteAdminCommand(string[] commandParts)
         {
             string inputString = string.Empty;
 
@@ -109,6 +118,32 @@ namespace Stregsystem
                 }
             else
                 ui.DisplayError("Not a valid admin command.\nWrite ':help' to get all admin commands.");
+        }
+
+        // Makes temporary Users to test the program
+        private void MakeTempUsers()
+        {
+            MakeUser("August Korvell siraggi aug.ust@aggisoft.dk");
+            MakeUser("August1 Korvell1 siraggi1 august1@aggisoft.dk");
+        }
+
+        private void MakeUser(string userDetails)
+        {
+            string[] parts = userDetails.Split(' ');
+
+            try
+            {
+                stregsystem.userHandler.MakeNewUser(parts[0], parts[1], parts[2], parts[3]);
+            }
+            catch (Exception e)
+            {
+                if (e is NotAValidEmailException)
+                    ui.DisplayError(parts[3] + " is not a Command");
+                else if (e is NotAValidUsernameException)
+                    ui.DisplayError(parts[2] + " is not a valid username");
+                else if (e is UsernameTakenException)
+                    ui.DisplayError("Username " + parts[2] + " is taken");
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Stregsystem
             this.amountOfProduct = 1;
         }
 
+        // Constructor for multibuy transactionss
         public BuyTransaction(int transactionID, User user, Product product, int amountOfProduct)
             : base(transactionID, user, -product.Price * amountOfProduct)
         {

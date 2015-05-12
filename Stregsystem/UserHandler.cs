@@ -18,10 +18,6 @@ namespace Stregsystem
         public UserHandler()
         {
             userList = new List<User>();
-
-            // Temp userlist
-            MakeNewUser("August", "Korvell", "siraggi", "august@aggisoft.dk", GetNextUserID());
-            MakeNewUser("August1", "Korvell1", "siraggi1", "august1@aggisoft.dk", GetNextUserID());
         }
 
         private int GetNextUserID()
@@ -29,7 +25,7 @@ namespace Stregsystem
             return userList.Count + 1;
         }
 
-        public void MakeNewUser(string firstname, string lastname, string username, string email, int userID)
+        public void MakeNewUser(string firstname, string lastname, string username, string email)
         {
             if (!IsValidEmail(email))
                 throw new NotAValidEmailException(email);
@@ -54,7 +50,7 @@ namespace Stregsystem
 
         private bool isValidUsername(string username)
         {
-            Regex regexItem = new Regex("^[a-z0-9 ]*$");
+            Regex regexItem = new Regex("^[a-z0-9_]*$");
 
             if (regexItem.IsMatch(username))
                 return true;

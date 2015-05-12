@@ -9,9 +9,9 @@ namespace Stregsystem
     class Stregsystem
     {
         public Log log;
+        public UserHandler userHandler;
 
         private ProductHandler productHandler;
-        private UserHandler userHandler;
         private List<Product> productList;
         private List<User> userList;
 

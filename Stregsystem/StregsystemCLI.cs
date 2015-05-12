@@ -90,6 +90,9 @@ namespace Stregsystem
             bool moreThanOne = transaction.AmountOfProduct > 1;
             Console.WriteLine("User " + transaction.User.Username + " bought " + 
                 (moreThanOne ? transaction.AmountOfProduct + " x " + transaction.Product.Name : transaction.Product.Name) + " for " + (-(transaction.Amount / 100)) + " kr.");
+
+            if(transaction.User.Balance < 5000)
+                Console.WriteLine("Your balance is running low.");
         }
 
         public void Close()

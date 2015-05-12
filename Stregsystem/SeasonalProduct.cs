@@ -20,7 +20,5 @@ namespace Stregsystem
             this.seasonStartDate = seasonStartDate;
             this.seasonEndDate = seasonEndDate;
         }
-
-        //Lav constructer så den ikke behøver start eller slut!
     }
 }

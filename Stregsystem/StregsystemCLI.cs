@@ -41,6 +41,7 @@ namespace Stregsystem
 
         private void GetCommand()
         {
+            Console.Write("\nWrite a command: ");
             string command = Console.ReadLine();
             Console.Clear();
 

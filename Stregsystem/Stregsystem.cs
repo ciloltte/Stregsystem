@@ -21,7 +21,7 @@ namespace Stregsystem
             productHandler = new ProductHandler();
             userHandler = new UserHandler();
 
-            productList = productHandler.GetProductList();
+            productList = productHandler.productList;
             userList = userHandler.Userlist;
         }
 
